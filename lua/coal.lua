@@ -1,4 +1,4 @@
-﻿local M = {}
+local M = {}
 
 local function reset()
     vim.api.nvim_command('hi clear')
