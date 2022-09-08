@@ -1,53 +1,4 @@
-﻿local colors = {
-    raisin_black = '#262626',
-
-    dark_charcoal = '#303030',
-    gray = '#7E7E7E',
-    quick_silver = '#A5A5A5',
-    chinese_silver = '#CCCCCC',
-    anti_flash_white = '#F2F2F2',
-    white = '#FFFFFF',
-}
-
-local palette = {
-    selection = {
-        foreground = colors.smoky_black,
-        background = colors.anti_flash_white,
-    },
-    background = {
-        medium = colors.smoky_black,
-        brighter = colors.eerie_black,
-        brightest = colors.raisin_black,
-    },
-    foreground = {
-        darkest = colors.dark_charcoal,
-        darker = colors.gray,
-        dimmed = colors.quick_silver,
-        medium = colors.chinese_silver,
-        brighter = colors.anti_flash_white,
-        brightest = colors.white,
-    },
-}
-
-local groups = {
-    normal = { fg = palette.foreground.medium, bg = palette.background.medium },
-    selection = { fg = palette.selection.foreground, bg = palette.selection.background },
-
-    darkest = { fg = palette.foreground.darkest },
-    darker = { fg = palette.foreground.darker },
-    darker_italic = { fg = palette.foreground.darker, em = 'italic' },
-    dimmed = { fg = palette.foreground.dimmed },
-    dimmed_italic = { fg = palette.foreground.dimmed, em = 'italic' },
-    medium = { fg = palette.foreground.medium },
-    medium_italic = { fg = palette.foreground.medium, em = 'italic' },
-    medium_underline = { fg = palette.foreground.medium, em = 'underline' },
-    brighter = { fg = palette.foreground.brighter },
-    brighter_italic = { fg = palette.foreground.brighter, em = 'italic' },
-    brightest = { fg = palette.foreground.brightest, em = 'none' },
-    brightest_bold = { fg = palette.foreground.brightest, em = 'bold' },
-}
-
-local M = {}
+﻿local M = {}
 
 local function reset()
     vim.api.nvim_command('hi clear')
@@ -65,9 +16,62 @@ local function expand_highlight_command_with(cmd, pattern, value)
     table.insert(cmd, string.format('%s=%s', pattern, value))
 end
 
-function M.setup()
+function M.setup(config)
     reset()
 
+    config = config or {}
+    local cc = config.colors or {}
+
+    local colors = {
+        smoky_black = cc.smoky_black or '#0C0C0C',
+        eerie_black = cc.eerie_black or '#1A1A1A',
+        raisin_black = cc.raisin_black or '#262626',
+
+        dark_charcoal = cc.dark_charcoal or '#303030',
+        gray = cc.gray or '#7E7E7E',
+        quick_silver = cc.quick_silver or '#A5A5A5',
+        chinese_silver = cc.chinese_silver or '#CCCCCC',
+        anti_flash_white = cc.anti_flash_white or '#F2F2F2',
+        white = cc.white or '#FFFFFF',
+    }
+
+    local palette = {
+        selection = {
+            foreground = colors.smoky_black,
+            background = colors.anti_flash_white,
+        },
+        background = {
+            medium = colors.smoky_black,
+            brighter = colors.eerie_black,
+            brightest = colors.raisin_black,
+        },
+        foreground = {
+            darkest = colors.dark_charcoal,
+            darker = colors.gray,
+            dimmed = colors.quick_silver,
+            medium = colors.chinese_silver,
+            brighter = colors.anti_flash_white,
+            brightest = colors.white,
+        },
+    }
+
+    local groups = {
+        normal = { fg = palette.foreground.medium, bg = palette.background.medium },
+        selection = { fg = palette.selection.foreground, bg = palette.selection.background },
+
+        darkest = { fg = palette.foreground.darkest },
+        darker = { fg = palette.foreground.darker },
+        darker_italic = { fg = palette.foreground.darker, em = 'italic' },
+        dimmed = { fg = palette.foreground.dimmed },
+        dimmed_italic = { fg = palette.foreground.dimmed, em = 'italic' },
+        medium = { fg = palette.foreground.medium },
+        medium_italic = { fg = palette.foreground.medium, em = 'italic' },
+        medium_underline = { fg = palette.foreground.medium, em = 'underline' },
+        brighter = { fg = palette.foreground.brighter },
+        brighter_italic = { fg = palette.foreground.brighter, em = 'italic' },
+        brightest = { fg = palette.foreground.brightest, em = 'none' },
+        brightest_bold = { fg = palette.foreground.brightest, em = 'bold' },
+    }
     local higlight_groups = {
         Normal = groups.normal,
 
