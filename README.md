@@ -1,24 +1,32 @@
 # coal.nvim
+
 A simple, mostly greyscale theme for NeoVim.
 
 The theme doesn't use any accent colours. There are shades of black and grey
 only. The diff view is gray scaled too. Only exceptions is for LSP warning and
 errors which have standard orange and red colours.
 
-## Screenshots
 
+## Screenshots
 ### Lua
 
-![Screenshot 2022-09-08 at 21 03 19](https://user-images.githubusercontent.com/77539239/189206175-e79271a3-9d7c-4af0-80e1-2cab4cc3a0b3.png)
+<img width="1001" height="750" alt="Screenshot 2025-10-15 at 20 50 04" src="https://github.com/user-attachments/assets/9a669ff6-ebef-452c-bdc2-8dde9adc5fa1" />
+
 
 ### C# with errors and warnings
-![Screenshot 2022-09-08 at 21 04 26](https://user-images.githubusercontent.com/77539239/189206233-957c2175-79a0-4cec-84e7-0444564439f1.png)
+
+<img width="1001" height="750" alt="Screenshot 2025-10-15 at 20 52 56" src="https://github.com/user-attachments/assets/5ea9ffbc-a098-48b5-bce3-1baeb5f0d68c" />
+
 
 ### Telescope
-![Screenshot 2022-09-08 at 21 06 28](https://user-images.githubusercontent.com/77539239/189206267-23ea48be-cc29-4932-a7f9-83a56824534d.png)
+
+<img width="1001" height="750" alt="Screenshot 2025-10-15 at 20 53 36" src="https://github.com/user-attachments/assets/51ada34b-0a35-41b9-93cf-8e87dbb8c3d9" />
+
 
 ### The diff view
-![Screenshot 2022-09-08 at 21 09 27](https://user-images.githubusercontent.com/77539239/189206305-059e72b6-7b40-4595-877d-0a849f4da369.png)
+
+<img width="1001" height="750" alt="Screenshot 2025-10-15 at 20 55 27" src="https://github.com/user-attachments/assets/fdc88498-72ac-4b60-bd1c-efca9abd9e6a" />
+
 
 ## Supported plugins highlight groups
 - LSP
@@ -85,4 +93,4 @@ require('coal').setup({
 
 ## Further development
 The theme is completed for my setup and I won't contribute to it for a while.
-But feel free to modify or extend for your needs 🙂
+But feel free to modify or extend for your needs.
