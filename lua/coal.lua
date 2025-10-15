@@ -8,44 +8,6 @@ local function reset()
 	vim.o.termguicolors = true
 end
 
-local function to_hl(spec)
-	if not spec then
-		return {}
-	end
-	local hl = {}
-	if spec.fg then
-		hl.fg = spec.fg
-	end
-	if spec.bg then
-		hl.bg = spec.bg
-	end
-	if spec.sp then
-		hl.sp = spec.sp
-	end
-
-	local em = spec.em
-	if em == nil or em == "none" then
-		return hl
-	end
-
-	if em:find("bold") then
-		hl.bold = true
-	end
-	if em:find("italic") then
-		hl.italic = true
-	end
-	if em:find("underline") then
-		hl.underline = true
-	end
-	if em:find("strikethrough") then
-		hl.strikethrough = true
-	end
-	if em:find("undercurl") then
-		hl.undercurl = true
-	end
-	return hl
-end
-
 function M.setup(config)
 	reset()
 
@@ -91,25 +53,23 @@ function M.setup(config)
 
 		darkest = { fg = palette.foreground.darkest },
 		darker = { fg = palette.foreground.darker },
-		darker_italic = { fg = palette.foreground.darker, em = "italic" },
+		darker_italic = { fg = palette.foreground.darker, italic = true },
 		dimmed = { fg = palette.foreground.dimmed },
-		dimmed_italic = { fg = palette.foreground.dimmed, em = "italic" },
+		dimmed_italic = { fg = palette.foreground.dimmed, italic = true },
 		medium = { fg = palette.foreground.medium },
-		medium_italic = { fg = palette.foreground.medium, em = "italic" },
-		medium_underline = { fg = palette.foreground.medium, em = "underline" },
+		medium_italic = { fg = palette.foreground.medium, italic = true },
+		medium_underline = { fg = palette.foreground.medium, underline = true },
 		brighter = { fg = palette.foreground.brighter },
-		brighter_italic = { fg = palette.foreground.brighter, em = "italic" },
-		brightest = { fg = palette.foreground.brightest, em = "none" },
-		brightest_bold = { fg = palette.foreground.brightest, em = "bold" },
+		brighter_italic = { fg = palette.foreground.brighter, italic = true },
+		brightest = { fg = palette.foreground.brightest },
+		brightest_bold = { fg = palette.foreground.brightest, bold = true },
 	}
-
-	local matchparen = { fg = palette.foreground.medium, bg = palette.background.brightest }
 
 	local highlight_groups = {
 		["Normal"] = groups.normal,
-		["Bold"] = { em = "bold" },
-		["Italic"] = { em = "italic" },
-		["Underlined"] = { em = "underline" },
+		["Bold"] = { bold = true },
+		["Italic"] = { italic = true },
+		["Underlined"] = { underline = true },
 
 		["Visual"] = groups.selection,
 
@@ -119,7 +79,9 @@ function M.setup(config)
 		["Search"] = groups.selection,
 		["Substitute"] = groups.selection,
 
-		["MatchParen"] = matchparen, -- << lowered contrast
+        ["QuickFixLine"] = { bg = palette.background.brightest },
+
+		["MatchParen"] = { fg = palette.foreground.brightest, bg = palette.background.brightest, bold = true },
 
 		["ModeMsg"] = groups.brighter,
 		["MoreMsg"] = groups.brighter,
@@ -134,7 +96,7 @@ function M.setup(config)
 		["StatusLineNC"] = { fg = palette.foreground.darkest, bg = palette.background.brighter },
 		["WinSeparator"] = { fg = palette.foreground.darkest, bg = palette.background.medium },
 		["SignColumn"] = groups.normal,
-		["ColorColumn"] = { bg = palette.background.brighter }, -- fixed casing
+		["ColorColumn"] = { bg = palette.background.brighter },
 
 		["TabLineFill"] = { bg = palette.background.brightest },
 		["TabLine"] = { fg = palette.foreground.dimmed, bg = palette.background.brightest },
@@ -152,10 +114,10 @@ function M.setup(config)
 		["Folded"] = { fg = palette.foreground.darker, bg = palette.background.brighter },
 		["FoldColumn"] = { fg = palette.foreground.darkest, bg = palette.background.medium },
 
-		["SpellBad"] = { em = "underline" },
-		["SpellLocal"] = { em = "underline" },
-		["SpellCap"] = { em = "underline" },
-		["SpellRare"] = { em = "underline" },
+		["SpellBad"] = { underline = true },
+		["SpellLocal"] = { underline = true },
+		["SpellCap"] = { underline = true },
+		["SpellRare"] = { underline = true },
 
 		["Boolean"] = groups.brighter,
 		["Character"] = groups.brighter,
@@ -233,10 +195,10 @@ function M.setup(config)
 		["@tag.attribute"] = groups.darker,
 		["@tag.delimiter"] = groups.darker,
 		["@text"] = groups.medium,
-		["@text.strong"] = { em = "bold" },
-		["@text.emphasis"] = { em = "italic" },
-		["@text.underline"] = { em = "underline" },
-		["@text.strike"] = { em = "strikethrough" },
+		["@text.strong"] = { bold = true },
+		["@text.emphasis"] = { italic = true },
+		["@text.underline"] = { underline = true },
+		["@text.strike"] = { strikethrough = true },
 		["@text.title"] = groups.brighter,
 		["@text.literal"] = groups.brighter,
 		["@text.uri"] = groups.medium_underline,
@@ -260,7 +222,7 @@ function M.setup(config)
 		["DiffDelete"] = { fg = palette.background.brighter, bg = palette.background.brighter },
 		["DiffRemoved"] = { fg = palette.foreground.darker },
 		["DiffChange"] = { bg = palette.background.brighter },
-		["DiffText"] = { fg = palette.background.medium, bg = palette.foreground.darker, em = "bold" },
+		["DiffText"] = { fg = palette.background.medium, bg = palette.foreground.darker, bold = true },
 		["DiffLine"] = { fg = palette.foreground.darker },
 
 		["TelescopeSelectionCaret"] = { bg = palette.background.brightest },
@@ -271,7 +233,7 @@ function M.setup(config)
 	}
 
 	for group, spec in pairs(highlight_groups) do
-		vim.api.nvim_set_hl(0, group, to_hl(spec))
+		vim.api.nvim_set_hl(0, group, spec)
 	end
 end
 
