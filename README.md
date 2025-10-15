@@ -28,21 +28,25 @@ errors which have standard orange and red colours.
 
 ## Installation
 
-Install with your packer manager, e.g. Packer:
+Install with your packer manager:
 
 ```lua
-use({
+{
     'cranberry-clockworks/coal.nvim',
-    config = function()
-        require('coal').setup()
-    end
 })
 ```
 
-or use the VIM command:
+To enable the colourscheme, use the following Vim command:
 
 ```vim
 colorscheme coal
+```
+
+or make a function call:
+
+```lua
+require('coal').setup()
+
 ```
 
 ## Colour palette
@@ -62,6 +66,10 @@ There are only 9 colours are defined:
 The main goal was picking up colours while keeping good readability and contrast
 ratios.
 
+This colourscheme leaving some defaults highlight groups untouched. This is by
+design. Among them, for example: `CurSearch`, `ErrorMsg` or `WarningMsg`.
+
+
 ## Base colours overriding
 
 Base colours could be overridden. Could be helpful to make background colour
@@ -76,5 +84,5 @@ require('coal').setup({
 ```
 
 ## Further development
-The theme is completed for my setup and I won't be contribute to it for a while.
+The theme is completed for my setup and I won't contribute to it for a while.
 But feel free to modify or extend for your needs 🙂
